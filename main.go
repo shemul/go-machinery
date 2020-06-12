@@ -1,16 +1,25 @@
+/**
+ * @author Kief H. Shemul
+ * @email theshemul@gmail.com
+ * @create date 2020-06-12 23:40:57
+ * @modify date 2020-06-12 23:40:57
+ * @desc go-machinery init
+ */
+
 package main
 
 import (
+	"os"
+
 	"github.com/RichardKnop/machinery/v1"
 	"github.com/shemul/go-machinery/server"
-	"github.com/shemul/go-machinery/worker"
 	"github.com/shemul/go-machinery/utils"
+	"github.com/shemul/go-machinery/worker"
 	"github.com/urfave/cli"
-	"os"
 )
 
 var (
-	app *cli.App
+	app        *cli.App
 	taskserver *machinery.Server
 )
 

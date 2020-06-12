@@ -1,3 +1,11 @@
+/**
+ * @author Kief H. Shemul
+ * @email theshemul@gmail.com
+ * @create date 2020-06-12 23:40:57
+ * @modify date 2020-06-12 23:40:57
+ * @desc go-machinery init
+ */
+
 package server
 
 import (
@@ -31,19 +39,19 @@ func StartServer(taskserver *machinery.Server) {
 					Value: p.Value1,
 				},
 				{
-					Type: "int64",
-					Value : p.Value2,
+					Type:  "int64",
+					Value: p.Value2,
 				},
 			},
 		}
 
-		res , err := taskserver.SendTask(&task)
+		res, err := taskserver.SendTask(&task)
 		if err != nil {
 			utils.Logger.Error(err.Error())
 		}
 
 		ctx.JSON(&fiber.Map{
-			"task_uuid" : res.GetState().TaskUUID,
+			"task_uuid": res.GetState().TaskUUID,
 		})
 
 	})
