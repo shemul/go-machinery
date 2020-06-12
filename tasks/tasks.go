@@ -1,9 +1,13 @@
 package tasks
 
-func Add(nums ...int64) int64 {
+import "time"
+
+func Add(args ...int64) (int64, error) {
 	sum := int64(0)
-	for _, n := range nums {
-		sum += n
+	for _, arg := range args {
+		sum += arg
 	}
-	return sum
+	time.Sleep(time.Second * 5)
+
+	return sum, nil
 }
