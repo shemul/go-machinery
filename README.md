@@ -53,14 +53,9 @@ go run main.go worker
 
 a little demo with curl.
 ```
-curl --request POST 'localhost:5000/send_task' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "value_1" : 1,
-    "value_2" : 1
-}'
+curl --request POST 'localhost:5000/send_task' --header 'Content-Type: application/json' --data-raw '{"email": "anyone@gmail.com","subject": "Hi","body":
 ```
 
 in worker 
 
-![image](https://user-images.githubusercontent.com/869628/84560761-b4381600-ad68-11ea-8279-33ffa10ff2e0.png)
+![image](https://cdn-images-1.medium.com/max/1600/1*aBmyIx1P7jUIfO3SNGKWqg.png)
