@@ -9,38 +9,37 @@
 package server
 
 import (
+	base64 "encoding/base64"
+	"encoding/json"
 	"github.com/RichardKnop/machinery/v1"
 	"github.com/RichardKnop/machinery/v1/tasks"
 	"github.com/gofiber/fiber"
+	task "github.com/shemul/go-machinery/tasks"
 	"github.com/shemul/go-machinery/utils"
 )
-
-type payload struct {
-	Value1 int64 `json:"value_1"`
-	Value2 int64 `json:"value_2"`
-}
 
 func StartServer(taskserver *machinery.Server) {
 
 	app := fiber.New()
 
-	app.Post("/send_task", func(ctx *fiber.Ctx) {
-		p := new(payload)
-		err := ctx.BodyParser(p)
+	app.Post("/send_email", func(ctx *fiber.Ctx) {
+		p := new(task.Payload)
+		if err := ctx.BodyParser(p); err != nil {
+			utils.Logger.Fatal(err)
+		}
+
+		reqJSON, err := json.Marshal(p)
 		if err != nil {
 			utils.Logger.Error(err.Error())
 		}
 
+		b64EncodedReq := base64.StdEncoding.EncodeToString([]byte(reqJSON))
 		task := tasks.Signature{
-			Name: "add",
+			Name: "send_email",
 			Args: []tasks.Arg{
 				{
-					Type:  "int64",
-					Value: p.Value1,
-				},
-				{
-					Type:  "int64",
-					Value: p.Value2,
+					Type:  "string",
+					Value: b64EncodedReq,
 				},
 			},
 		}

@@ -27,7 +27,7 @@ func GetMachineryServer() *machinery.Server {
 	}
 
 	taskserver.RegisterTasks(map[string]interface{}{
-		"add": tasks.Add,
+		"send_email": tasks.SendMail,
 	})
 
 	return taskserver
