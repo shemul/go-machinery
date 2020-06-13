@@ -5,11 +5,10 @@
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Usage](#usage)
-- [Contributing](../CONTRIBUTING.md)
 
 ## About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+A very basic example of task queuing in Machinery and Golang. In the example a golang web server takes input as task and worker consume that task.
 
 ## Getting Started <a name = "getting_started"></a>
 
@@ -20,27 +19,48 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them.
 
 ```
-Give examples
+go environment
 ```
 
-### Installing
+### Usage <a name = "usage"></a>
 
 A step by step series of examples that tell you how to get a development env running.
 
-Say what the step will be
+start with dependencies download
 
 ```
-Give the example
+go mod download
 ```
 
-And repeat
+Spawn a redis server for `Broker` and `ResultBackend`
 
 ```
-until finished
+docker run -d -p 6379:6379 redis
 ```
 
-End with an example of getting some data out of the system or using it for a little demo.
+run the webserver server on port 5000
 
-## Usage <a name = "usage"></a>
+```
+go run main.go server
+```
 
-Add notes about how to use the system.
+finally, run the worker 
+
+```
+go run main.go worker
+```
+
+
+a little demo with curl.
+```
+curl --request POST 'localhost:5000/send_task' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "value_1" : 1,
+    "value_2" : 1
+}'
+```
+
+in worker 
+
+![image](https://user-images.githubusercontent.com/869628/84560761-b4381600-ad68-11ea-8279-33ffa10ff2e0.png)
