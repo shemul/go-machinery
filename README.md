@@ -53,7 +53,7 @@ go run main.go worker
 
 a little demo with curl.
 ```
-curl --request POST 'localhost:5000/send_task' --header 'Content-Type: application/json' --data-raw '{"email": "anyone@gmail.com","subject": "Hi","body":
+curl --request POST 'localhost:5000/send_email' --header 'Content-Type: application/json' --data-raw '{"email": "anyone@gmail.com","subject": "Hi","body":"hope you are fine"}'
 ```
 
 in worker 
